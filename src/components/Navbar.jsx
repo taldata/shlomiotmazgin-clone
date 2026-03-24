@@ -6,10 +6,8 @@ export default function Navbar() {
     <nav className="fixed top-0 w-full z-50 bg-white border-b border-border">
       <div className="max-w-[1200px] mx-auto px-8 h-[5.5rem] flex justify-between items-center">
         
-        <div className="flex items-center gap-6">
-          <div className="w-[45px] h-[45px] rounded-full border-2 border-accent flex items-center justify-center font-bold font-serif text-xl italic tracking-tighter">
-            SO
-          </div>
+        <div className="flex items-center gap-4">
+          <img src="/logo.avif" alt="Shlomi Otmazgin" className="h-11 w-11 rounded-full object-cover" />
           <a href="/" className="text-xl font-extrabold text-textPrimary tracking-[4px] leading-tight">
             SHLOMI<br/>OTMAZGIN
           </a>

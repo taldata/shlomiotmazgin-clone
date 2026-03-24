@@ -1,0 +1,137 @@
+import React, { useState, useEffect } from 'react';
+import { X } from 'react-feather';
+
+export default function ContactModal({ isOpen, onClose }) {
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      onClose();
+    }, 2000);
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-[fadeIn_0.3s_ease]" />
+
+      {/* Modal */}
+      <div
+        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 animate-[modalSlideUp_0.4s_cubic-bezier(0.16,1,0.3,1)]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/5 transition-colors text-textSecondary hover:text-textPrimary"
+        >
+          <X size={20} />
+        </button>
+
+        {isSubmitted ? (
+          <div className="text-center py-12 animate-[fadeIn_0.3s_ease]">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-semibold mb-2">Thank you!</h3>
+            <p className="text-textSecondary">I'll get back to you shortly.</p>
+          </div>
+        ) : (
+          <>
+            <h3 className="text-2xl font-semibold mb-2">Get in Touch</h3>
+            <p className="text-textSecondary mb-8">Fill in your details and I'll get back to you as soon as possible.</p>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-textPrimary mb-1.5">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-textPrimary mb-1.5">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  placeholder="your@email.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-textPrimary mb-1.5">Phone (optional)</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  placeholder="+972-XX-XXX-XXXX"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-textPrimary mb-1.5">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all resize-none"
+                  placeholder="Tell me about your project or question..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 rounded-lg font-semibold bg-textPrimary text-white hover:-translate-y-0.5 hover:shadow-lg transition-all mt-2"
+              >
+                Send Message
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
