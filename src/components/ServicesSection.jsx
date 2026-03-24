@@ -1,54 +1,5 @@
 import React from 'react';
 import { Bot, Briefcase, Zap, TrendingUp, Users } from 'lucide-react';
-import { styled } from '../stitches.config';
-
-const Section = styled('section', {
-  padding: '$7 0',
-  position: 'relative'
-});
-
-const Container = styled('div', {
-  maxWidth: '1200px', margin: '0 auto', padding: '0 $4',
-  position: 'relative', zIndex: 10
-});
-
-const Title = styled('h2', {
-  fontSize: 'clamp(2rem, 4vw, 3rem)', textAlign: 'center', marginBottom: '$2'
-});
-
-const Subtitle = styled('p', {
-  textAlign: 'center', color: '$textSecondary', marginBottom: '$6', maxWidth: '600px', margin: '0 auto $7 auto'
-});
-
-const Grid = styled('div', {
-  display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '$4'
-});
-
-const Card = styled('div', {
-  padding: '$4', display: 'flex', flexDirection: 'column', gap: '$3',
-  background: '$bgPanel', boxShadow: '$1', border: '1px solid $border', borderRadius: '$3',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: '$2',
-  }
-});
-
-const IconWrapper = styled('div', {
-  padding: '$2', background: 'rgba(59, 130, 246, 0.1)', width: 'fit-content', borderRadius: '$2'
-});
-
-const CardTitle = styled('h3', {
-  fontSize: '$5', marginTop: '$1'
-});
-
-const CardDesc = styled('p', {
-  color: '$textSecondary'
-});
-
-const CardList = styled('ul', {
-  marginTop: 'auto', paddingLeft: '$3', display: 'flex', flexDirection: 'column', gap: '$1', color: '$textMuted', fontSize: '$1'
-});
 
 export default function ServicesSection() {
   const services = [
@@ -105,26 +56,31 @@ export default function ServicesSection() {
   ];
 
   return (
-    <Section id="services">
-      <Container>
-        <Title>Core Services</Title>
-        <Subtitle>Aligning engineering execution directly with commercial outcomes.</Subtitle>
+    <section id="services" className="py-28 relative">
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
+        <h2 className="text-[clamp(2rem,4vw,3rem)] text-center mb-4">Core Services</h2>
+        <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto">
+          Aligning engineering execution directly with commercial outcomes.
+        </p>
 
-        <Grid>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-8">
           {services.map((service, index) => (
-            <Card key={index}>
-              <IconWrapper>{service.icon}</IconWrapper>
-              <CardTitle>{service.title}</CardTitle>
-              <CardDesc>{service.description}</CardDesc>
-              <CardList>
+            <div key={index} className="glass-panel p-8 flex flex-col gap-6">
+              <div className="p-4 bg-blue-500/10 w-fit rounded-xl">
+                {service.icon}
+              </div>
+              <h3 className="text-2xl mt-2">{service.title}</h3>
+              <p className="text-textSecondary leading-relaxed">{service.description}</p>
+              
+              <ul className="mt-auto pl-6 flex flex-col gap-2 text-textMuted text-sm list-disc">
                 {service.bullets.map((bullet, i) => (
                   <li key={i}>{bullet}</li>
                 ))}
-              </CardList>
-            </Card>
+              </ul>
+            </div>
           ))}
-        </Grid>
-      </Container>
-    </Section>
+        </div>
+      </div>
+    </section>
   );
 }

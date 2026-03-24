@@ -1,69 +1,38 @@
 import React from 'react';
 import { Linkedin, Mail } from 'react-feather';
-import { styled } from '../stitches.config';
-
-const FooterWrap = styled('footer', {
-  borderTop: '1px solid $border', padding: '$6 0', background: '$bgPanel'
-});
-
-const Container = styled('div', {
-  maxWidth: '1200px', margin: '0 auto', padding: '0 $4',
-  display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '$4'
-});
-
-const Title = styled('h2', {
-  fontSize: '$6'
-});
-
-const Subtitle = styled('p', {
-  color: '$textSecondary', maxWidth: '500px'
-});
-
-const Actions = styled('div', {
-  display: 'flex', gap: '$3'
-});
-
-const ContactBtn = styled('a', {
-  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-  padding: '0.75rem 2rem', borderRadius: '$1', fontWeight: 600,
-  background: '$textPrimary', color: 'white',
-  transition: 'transform 0.2s',
-  '&:hover': { transform: 'translateY(-2px)' }
-});
-
-const SocialBtn = styled('a', {
-  display: 'inline-flex', padding: '0.75rem', borderRadius: '$round', color: '$textPrimary',
-  background: '$bgMain', boxShadow: '$1', border: '1px solid $border',
-  transition: 'transform 0.2s, box-shadow 0.2s',
-  '&:hover': { transform: 'translateY(-2px)', boxShadow: '$2' }
-});
-
-const Copyright = styled('div', {
-  marginTop: '$4', paddingTop: '$4', borderTop: '1px solid $border', width: '100%', color: '$textMuted', fontSize: '$1'
-});
 
 export default function Footer() {
   return (
-    <FooterWrap id="contact">
-      <Container>
-        <Title>Ready to transform your R&D?</Title>
-        <Subtitle>
+    <footer id="contact" className="border-t border-border py-24 bg-bgPanel">
+      <div className="max-w-7xl mx-auto px-8 flex flex-col items-center text-center gap-8">
+        
+        <h2 className="text-3xl">Ready to transform your R&D?</h2>
+        <p className="text-textSecondary max-w-xl leading-relaxed">
           Let's talk about how we can align your engineering teams with your commercial goals for maximum ROI.
-        </Subtitle>
+        </p>
         
-        <Actions>
-          <ContactBtn href="mailto:contact@shlomiotmazgin.com">
-            <Mail size={18} style={{ marginRight: '0.5rem' }} /> Contact Me
-          </ContactBtn>
-          <SocialBtn href="https://linkedin.com" target="_blank" rel="noreferrer">
-            <Linkedin size={24} />
-          </SocialBtn>
-        </Actions>
+        <div className="flex gap-4 mt-2">
+          <a 
+            href="mailto:contact@shlomiotmazgin.com" 
+            className="inline-flex items-center justify-center px-8 py-3 rounded font-semibold bg-textPrimary text-white hover:-translate-y-0.5 transition-transform"
+          >
+            <Mail size={18} className="mr-2" /> Contact Me
+          </a>
+          <a 
+            href="https://linkedin.com" 
+            target="_blank" 
+            rel="noreferrer"
+            className="inline-flex items-center justify-center p-3 rounded-full text-textPrimary bg-bgMain border border-border hover:-translate-y-0.5 shadow-sm hover:shadow-md transition-all"
+          >
+            <Linkedin size={20} />
+          </a>
+        </div>
         
-        <Copyright>
+        <div className="mt-16 pt-8 border-t border-border w-full text-textMuted text-sm">
           &copy; {new Date().getFullYear()} Shlomi Otmazgin. All rights reserved.
-        </Copyright>
-      </Container>
-    </FooterWrap>
+        </div>
+        
+      </div>
+    </footer>
   );
 }

@@ -1,62 +1,4 @@
 import React from 'react';
-import { styled } from '../stitches.config';
-
-const Section = styled('section', {
-  padding: '$7 0', background: '$bgPanel'
-});
-
-const Container = styled('div', {
-  maxWidth: '1200px', margin: '0 auto', padding: '0 $4',
-});
-
-const Grid = styled('div', {
-  display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '$6', alignItems: 'center',
-  '@media (max-width: 768px)': { gridTemplateColumns: '1fr' }
-});
-
-const ContentWrapper = styled('div', {
-  '@media (max-width: 768px)': { gridColumn: '1 / -1' }
-});
-
-const Title = styled('h2', {
-  fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '$3'
-});
-
-const Text = styled('p', {
-  fontSize: '$3', color: '$textSecondary', marginBottom: '$4'
-});
-
-const ConnectBtn = styled('a', {
-  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-  padding: '0.75rem 1.75rem', borderRadius: '$1', fontWeight: 600,
-  background: 'transparent', border: '1px solid $textPrimary', color: '$textPrimary',
-  transition: 'background 0.3s',
-  '&:hover': { background: '$border' }
-});
-
-const Timeline = styled('div', {
-  display: 'flex', flexDirection: 'column', gap: '$4'
-});
-
-const TimelineItem = styled('div', {
-  borderLeft: '2px solid $border', paddingLeft: '$4', position: 'relative'
-});
-
-const TimelineDot = styled('div', {
-  position: 'absolute', left: '-7px', top: '0', width: '12px', height: '12px', borderRadius: '$round', background: '$accent'
-});
-
-const CompanyTitle = styled('h3', {
-  fontSize: '$4', marginBottom: '0.25rem'
-});
-
-const JobTitle = styled('span', {
-  fontSize: '$1', color: '$textSecondary', fontWeight: 600, display: 'block', marginBottom: '$2', textTransform: 'uppercase', letterSpacing: '1px'
-});
-
-const JobDesc = styled('p', {
-  color: '$textSecondary', fontSize: '0.95rem'
-});
 
 export default function AboutSection() {
   const experiences = [
@@ -78,32 +20,39 @@ export default function AboutSection() {
   ];
 
   return (
-    <Section id="about">
-      <Container>
-        <Grid>
-          <ContentWrapper>
-            <Title>What makes me different?</Title>
-            <Text>
+    <section id="about" className="py-28 bg-bgPanel">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          
+          <div className="col-span-1">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] mb-6">What makes me different?</h2>
+            <p className="text-lg text-textSecondary mb-8 leading-relaxed">
               From scaling high-growth startups to advising global enterprises and mid-market companies, my experience spans the entire business spectrum.
-            </Text>
-            <Text>
+            </p>
+            <p className="text-lg text-textSecondary mb-8 leading-relaxed">
               I specialize in guiding organizations through critical junctions, such as comprehensive Due Diligence preparation for acquisitions, while maintaining a cross-functional focus on process optimization and unlocking the full potential of engineering development teams.
-            </Text>
-            <ConnectBtn href="#contact">Connect with me</ConnectBtn>
-          </ContentWrapper>
+            </p>
+            <a 
+              href="#contact" 
+              className="inline-flex items-center justify-center px-7 py-3 rounded font-semibold bg-transparent border border-textPrimary text-textPrimary hover:bg-black/5 transition-colors"
+            >
+              Connect with me
+            </a>
+          </div>
 
-          <Timeline>
+          <div className="flex flex-col gap-10">
             {experiences.map((exp, index) => (
-              <TimelineItem key={index}>
-                <TimelineDot />
-                <CompanyTitle>{exp.company}</CompanyTitle>
-                <JobTitle>{exp.title}</JobTitle>
-                <JobDesc>{exp.description}</JobDesc>
-              </TimelineItem>
+              <div key={index} className="border-l-2 border-border pl-8 relative">
+                <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-accent" />
+                <h3 className="text-xl mb-1">{exp.company}</h3>
+                <span className="text-sm text-textSecondary font-semibold block mb-4 uppercase tracking-widest">{exp.title}</span>
+                <p className="text-textSecondary leading-relaxed">{exp.description}</p>
+              </div>
             ))}
-          </Timeline>
-        </Grid>
-      </Container>
-    </Section>
+          </div>
+
+        </div>
+      </div>
+    </section>
   );
 }

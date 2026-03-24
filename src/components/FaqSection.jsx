@@ -1,40 +1,5 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'react-feather';
-import { styled } from '../stitches.config';
-
-const Section = styled('section', {
-  padding: '$7 0'
-});
-
-const Container = styled('div', {
-  maxWidth: '800px', margin: '0 auto', padding: '0 $4'
-});
-
-const Title = styled('h2', {
-  fontSize: 'clamp(2rem, 4vw, 3rem)', textAlign: 'center', marginBottom: '$6'
-});
-
-const FaqList = styled('div', {
-  display: 'flex', flexDirection: 'column', gap: '$3'
-});
-
-const FaqItem = styled('div', {
-  background: '$bgPanel', boxShadow: '$1', border: '1px solid $border', borderRadius: '$3',
-  overflow: 'hidden', cursor: 'pointer', transition: 'box-shadow 0.3s',
-  '&:hover': { boxShadow: '$2' }
-});
-
-const FaqHeader = styled('div', {
-  padding: '$4', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-});
-
-const FaqQuestion = styled('h3', {
-  fontSize: '$3', margin: 0
-});
-
-const FaqAnswer = styled('div', {
-  padding: '0 $4 $4 $4', color: '$textSecondary'
-});
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
@@ -75,24 +40,33 @@ export default function FaqSection() {
   ];
 
   return (
-    <Section id="faq">
-      <Container>
-        <Title>Frequently Asked Questions</Title>
-        <FaqList>
+    <section id="faq" className="py-28">
+      <div className="max-w-3xl mx-auto px-8">
+        <h2 className="text-[clamp(2rem,4vw,3rem)] text-center mb-16">Frequently Asked Questions</h2>
+        
+        <div className="flex flex-col gap-4">
           {faqs.map((faq, index) => {
             const isOpen = index === openIndex;
             return (
-              <FaqItem key={index} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
-                <FaqHeader>
-                  <FaqQuestion>{faq.q}</FaqQuestion>
-                  {isOpen ? <ChevronUp size={20} color="#000" /> : <ChevronDown size={20} color="#71717a" />}
-                </FaqHeader>
-                {isOpen && <FaqAnswer>{faq.a}</FaqAnswer>}
-              </FaqItem>
+              <div 
+                key={index}
+                className="bg-bgPanel hover:shadow-md transition-shadow cursor-pointer rounded-xl border border-border overflow-hidden" 
+                onClick={() => setOpenIndex(isOpen ? -1 : index)}
+              >
+                <div className="p-6 flex justify-between items-center">
+                  <h3 className="text-lg m-0 font-sans font-bold">{faq.q}</h3>
+                  {isOpen ? <ChevronUp size={20} color="#000" /> : <ChevronDown size={20} className="text-textMuted" />}
+                </div>
+                {isOpen && (
+                  <div className="px-6 pb-6 text-textSecondary leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
             )
           })}
-        </FaqList>
-      </Container>
-    </Section>
+        </div>
+      </div>
+    </section>
   );
 }
