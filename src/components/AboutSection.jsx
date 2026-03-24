@@ -1,4 +1,62 @@
 import React from 'react';
+import { styled } from '../stitches.config';
+
+const Section = styled('section', {
+  padding: '$7 0', background: '$bgPanel'
+});
+
+const Container = styled('div', {
+  maxWidth: '1200px', margin: '0 auto', padding: '0 $4',
+});
+
+const Grid = styled('div', {
+  display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '$6', alignItems: 'center',
+  '@media (max-width: 768px)': { gridTemplateColumns: '1fr' }
+});
+
+const ContentWrapper = styled('div', {
+  '@media (max-width: 768px)': { gridColumn: '1 / -1' }
+});
+
+const Title = styled('h2', {
+  fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '$3'
+});
+
+const Text = styled('p', {
+  fontSize: '$3', color: '$textSecondary', marginBottom: '$4'
+});
+
+const ConnectBtn = styled('a', {
+  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+  padding: '0.75rem 1.75rem', borderRadius: '$1', fontWeight: 600,
+  background: 'transparent', border: '1px solid $textPrimary', color: '$textPrimary',
+  transition: 'background 0.3s',
+  '&:hover': { background: '$border' }
+});
+
+const Timeline = styled('div', {
+  display: 'flex', flexDirection: 'column', gap: '$4'
+});
+
+const TimelineItem = styled('div', {
+  borderLeft: '2px solid $border', paddingLeft: '$4', position: 'relative'
+});
+
+const TimelineDot = styled('div', {
+  position: 'absolute', left: '-7px', top: '0', width: '12px', height: '12px', borderRadius: '$round', background: '$accent'
+});
+
+const CompanyTitle = styled('h3', {
+  fontSize: '$4', marginBottom: '0.25rem'
+});
+
+const JobTitle = styled('span', {
+  fontSize: '$1', color: '$textSecondary', fontWeight: 600, display: 'block', marginBottom: '$2', textTransform: 'uppercase', letterSpacing: '1px'
+});
+
+const JobDesc = styled('p', {
+  color: '$textSecondary', fontSize: '0.95rem'
+});
 
 export default function AboutSection() {
   const experiences = [
@@ -20,34 +78,32 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="section" style={{ background: 'var(--bg-panel)' }}>
-      <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
-          <div style={{ '@media (max-width: 768px)': { gridColumn: '1 / -1' } }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '1.5rem' }}>
-              What makes me <span className="text-gradient">different?</span>
-            </h2>
-            <p style={{ fontSize: '1.125rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+    <Section id="about">
+      <Container>
+        <Grid>
+          <ContentWrapper>
+            <Title>What makes me different?</Title>
+            <Text>
               From scaling high-growth startups to advising global enterprises and mid-market companies, my experience spans the entire business spectrum.
-            </p>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+            </Text>
+            <Text>
               I specialize in guiding organizations through critical junctions, such as comprehensive Due Diligence preparation for acquisitions, while maintaining a cross-functional focus on process optimization and unlocking the full potential of engineering development teams.
-            </p>
-            <a href="#contact" className="btn btn-secondary">Connect with me</a>
-          </div>
+            </Text>
+            <ConnectBtn href="#contact">Connect with me</ConnectBtn>
+          </ContentWrapper>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <Timeline>
             {experiences.map((exp, index) => (
-              <div key={index} style={{ borderLeft: '2px solid var(--border-color)', paddingLeft: '2rem', position: 'relative' }}>
-                <div style={{ position: 'absolute', left: '-7px', top: '0', width: '12px', height: '12px', borderRadius: '50%', background: 'var(--accent-color)', boxShadow: '0 0 10px var(--accent-color)' }} />
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{exp.company}</h3>
-                <span style={{ fontSize: '0.875rem', color: 'var(--accent-color)', fontWeight: 600, display: 'block', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{exp.title}</span>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{exp.description}</p>
-              </div>
+              <TimelineItem key={index}>
+                <TimelineDot />
+                <CompanyTitle>{exp.company}</CompanyTitle>
+                <JobTitle>{exp.title}</JobTitle>
+                <JobDesc>{exp.description}</JobDesc>
+              </TimelineItem>
             ))}
-          </div>
-        </div>
-      </div>
-    </section>
+          </Timeline>
+        </Grid>
+      </Container>
+    </Section>
   );
 }
