@@ -20,9 +20,9 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-28 bg-bgPanel">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    <section id="about" className="py-16 sm:py-28 bg-bgPanel">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 items-center">
 
           <div className="col-span-1">
             <h2 className="text-[clamp(2rem,4vw,3rem)] mb-6">

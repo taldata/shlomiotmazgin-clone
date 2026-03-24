@@ -6,8 +6,8 @@ export default function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <footer id="contact" className="border-t border-border py-24 bg-bgPanel">
-      <div className="max-w-7xl mx-auto px-8 flex flex-col items-center text-center gap-8">
+    <footer id="contact" className="border-t border-border py-16 sm:py-24 bg-bgPanel">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col items-center text-center gap-8">
 
         <h2 className="text-3xl">Ready to transform your R&D?</h2>
         <p className="text-textSecondary max-w-xl leading-relaxed">

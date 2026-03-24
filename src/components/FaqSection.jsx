@@ -40,8 +40,8 @@ export default function FaqSection() {
   ];
 
   return (
-    <section id="faq" className="py-28">
-      <div className="max-w-3xl mx-auto px-8">
+    <section id="faq" className="py-16 sm:py-28">
+      <div className="max-w-3xl mx-auto px-4 sm:px-8">
         <h2 className="text-[clamp(2rem,4vw,3rem)] text-center mb-16">Frequently Asked Questions</h2>
         
         <div className="flex flex-col gap-4">

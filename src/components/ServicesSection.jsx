@@ -68,13 +68,13 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="py-28 relative">
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
-        <h2 className="text-[clamp(2rem,4vw,3rem)] text-center mb-16">Core Services</h2>
+    <section id="services" className="py-16 sm:py-28 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+        <h2 className="text-[clamp(2rem,4vw,3rem)] text-center mb-10 sm:mb-16">Core Services</h2>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 sm:gap-8">
           {services.map((service, index) => (
-            <div key={index} className="glass-panel p-8 flex flex-col gap-6">
+            <div key={index} className="glass-panel p-6 sm:p-8 flex flex-col gap-6">
               <div className="p-4 bg-black/5 w-fit rounded-xl text-textPrimary">
                 {service.icon}
               </div>
