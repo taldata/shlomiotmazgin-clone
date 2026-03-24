@@ -3,7 +3,7 @@ import React from 'react';
 export default function HeroSection() {
   return (
     <section className="mt-[5.5rem] relative w-full overflow-hidden">
-      <div style={{ clipPath: 'inset(0 0 5% 0)' }}>
+      <div style={{ clipPath: 'inset(0 3% 10% 0)' }}>
         <img
           src="/hero-image.png"
           alt="Transform your R&D 'Black Box' into a strategic ROI driver"
