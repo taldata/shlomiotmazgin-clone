@@ -19,8 +19,8 @@ export default function HeroSection() {
 
       {/* Content overlay */}
       {/* Mobile: stronger overlay so text is readable over the person */}
-      <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#1B2A4A]/90 via-[#1B2A4A]/70 sm:from-[#1B2A4A]/70 sm:via-[#1B2A4A]/30 to-[#1B2A4A]/60 sm:to-transparent flex items-center">
-        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 w-full pb-28 sm:pb-0">
+      <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#1B2A4A]/90 via-[#1B2A4A]/70 sm:from-[#1B2A4A]/70 sm:via-[#1B2A4A]/30 to-[#1B2A4A]/60 sm:to-transparent flex items-end sm:items-center">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 w-full pb-32 sm:pb-0">
           <div className="max-w-xl animate-fade-up">
             <span className="inline-block text-xs sm:text-sm font-semibold tracking-widest uppercase text-blue-300 mb-3 sm:mb-6">
               Fractional VP R&D &middot; CTO Advisory
