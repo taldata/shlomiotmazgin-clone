@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X } from 'react-feather';
+
+// ← Replace with your Web3Forms access key (get one at https://web3forms.com)
+const WEB3FORMS_KEY = '2ebfde27-eeb9-47e9-8d92-16aa53671557';
 
 export default function ContactModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('');
   const firstInputRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      setStatus('idle');
       setTimeout(() => firstInputRef.current?.focus(), 100);
     } else {
       document.body.style.overflow = '';
@@ -20,14 +25,43 @@ export default function ContactModal({ isOpen, onClose }) {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-      onClose();
-    }, 2000);
+    setStatus('sending');
+
+    const payload = new FormData();
+    payload.append('access_key', WEB3FORMS_KEY);
+    payload.append('subject', 'New Contact — shlomiotmazgin.com');
+    payload.append('from_name', formData.name);
+    payload.append('name', formData.name);
+    payload.append('email', formData.email);
+    payload.append('phone', formData.phone || 'Not provided');
+    payload.append('message', formData.message);
+    // Honeypot spam protection
+    payload.append('botcheck', '');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload,
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        setStatus('success');
+        setTimeout(() => {
+          setFormData({ name: '', email: '', phone: '', message: '' });
+          setStatus('idle');
+          onClose();
+        }, 2500);
+      } else {
+        setErrorMsg(result.message || 'Something went wrong.');
+        setStatus('error');
+      }
+    } catch {
+      setErrorMsg('Network error. Please try again.');
+      setStatus('error');
+    }
   };
 
   if (!isOpen) return null;
@@ -57,7 +91,7 @@ export default function ContactModal({ isOpen, onClose }) {
           <X size={20} />
         </button>
 
-        {isSubmitted ? (
+        {status === 'success' ? (
           <div className="text-center py-12 animate-[fadeIn_0.3s_ease]">
             <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-8 h-8 text-accentBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -72,7 +106,16 @@ export default function ContactModal({ isOpen, onClose }) {
             <h3 className="text-2xl font-semibold mb-2">Get in Touch</h3>
             <p className="text-textSecondary mb-8">Fill in your details and I'll get back to you as soon as possible.</p>
 
+            {status === 'error' && (
+              <div className="mb-5 p-3 rounded-lg bg-red-50 text-red-700 text-sm">
+                {errorMsg}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              {/* Honeypot — hidden from users, catches bots */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-textPrimary mb-1.5">Full Name</label>
                 <input
@@ -131,9 +174,10 @@ export default function ContactModal({ isOpen, onClose }) {
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors mt-2 cursor-pointer"
+                disabled={status === 'sending'}
+                className="w-full py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors mt-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Send Message
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </>
