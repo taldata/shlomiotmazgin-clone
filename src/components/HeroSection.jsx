@@ -26,8 +26,8 @@ export default function HeroSection() {
               Fractional VP R&D &middot; CTO Advisory
             </span>
             <h1 className="text-[clamp(2rem,6vw,3.25rem)] text-white leading-[1.15] mb-4 sm:mb-6">
-              Transform your R&D<br className="hidden sm:block" />
-              into an <span className="text-blue-400">AI-driven</span><br className="hidden sm:block" />
+              Transform your R&D{' '}<br className="hidden sm:block" />
+              into an <span className="text-blue-400">AI-driven</span>{' '}<br className="hidden sm:block" />
               growth engine
             </h1>
             <p className="text-slate-300 text-sm sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-md">
