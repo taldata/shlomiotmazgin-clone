@@ -19,8 +19,8 @@ export default function HeroSection() {
 
       {/* Content overlay */}
       {/* Mobile: stronger overlay so text is readable over the person */}
-      <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#1B2A4A]/90 via-[#1B2A4A]/70 sm:from-[#1B2A4A]/70 sm:via-[#1B2A4A]/30 to-[#1B2A4A]/60 sm:to-transparent flex items-start sm:items-center">
-        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 w-full pt-6 sm:pt-0">
+      <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#1B2A4A]/90 via-[#1B2A4A]/70 sm:from-[#1B2A4A]/70 sm:via-[#1B2A4A]/30 to-[#1B2A4A]/60 sm:to-transparent flex flex-col justify-between sm:flex-row sm:items-center">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 w-full pt-6 sm:pt-0 flex flex-col justify-between h-full sm:h-auto sm:block">
           <div className="max-w-xl animate-fade-up">
             <span className="inline-block text-xs sm:text-sm font-semibold tracking-widest uppercase text-blue-300 mb-3 sm:mb-6">
               Fractional VP R&D &middot; CTO Advisory
@@ -30,25 +30,25 @@ export default function HeroSection() {
               into an <span className="text-blue-400">AI-driven</span>{' '}<br className="hidden sm:block" />
               growth engine
             </h1>
-            <p className="text-slate-300 text-sm sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-md">
+            <p className="text-slate-300 text-sm sm:text-lg leading-relaxed mb-0 sm:mb-8 max-w-md">
               Strategic technology leadership for CEOs who demand transparency, velocity, and measurable results from their engineering teams.
             </p>
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors cursor-pointer text-sm sm:text-base"
-              >
-                Book a Consultation
-                <ArrowRight size={18} />
-              </button>
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg font-semibold text-white border border-white/25 hover:bg-white/10 transition-colors text-sm sm:text-base"
-              >
-                View Services
-              </a>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pb-32 sm:pb-0 max-w-xl">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors cursor-pointer text-sm sm:text-base"
+            >
+              Book a Consultation
+              <ArrowRight size={18} />
+            </button>
+            <a
+              href="#services"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg font-semibold text-white border border-white/25 hover:bg-white/10 transition-colors text-sm sm:text-base"
+            >
+              View Services
+            </a>
           </div>
         </div>
       </div>
