@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Linkedin, Menu, X } from 'react-feather';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const links = [
     { href: '/', label: 'Home' },
@@ -13,7 +20,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white border-b border-border">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_3px_rgba(0,0,0,0.06)] border-b border-border'
+          : 'bg-white border-b border-border'
+      }`}
+    >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8 h-[5.5rem] flex justify-between items-center">
 
         <div className="flex items-center gap-3 sm:gap-4">
@@ -26,19 +39,31 @@ export default function Navbar() {
         {/* Desktop links */}
         <div className="hidden md:flex gap-10 items-center">
           {links.map(link => (
-            <a key={link.label} href={link.href} className="text-textSecondary font-medium text-[0.9rem] hover:text-textPrimary transition-colors">
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-textSecondary font-medium text-[0.9rem] hover:text-accentBlue transition-colors"
+            >
               {link.label}
             </a>
           ))}
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-accent hover:text-textSecondary transition-colors">
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn profile"
+            className="text-textSecondary hover:text-accentBlue transition-colors"
+          >
             <Linkedin size={20} />
           </a>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 text-textPrimary"
+          className="md:hidden p-2 text-textPrimary cursor-pointer"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -52,13 +77,19 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-textSecondary font-medium text-base py-2 hover:text-textPrimary transition-colors"
+                className="text-textSecondary font-medium text-base py-2 hover:text-accentBlue transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-accent py-2">
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn profile"
+              className="text-textSecondary py-2 hover:text-accentBlue transition-colors"
+            >
               <Linkedin size={20} />
             </a>
           </div>

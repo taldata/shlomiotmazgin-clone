@@ -128,10 +128,10 @@ export default function DevelopmentPage() {
         <div className="max-w-7xl mx-auto px-8 py-24">
           <div className="max-w-3xl">
             <div className="flex items-center gap-4 mb-8">
-              <div className="p-4 bg-black/5 rounded-xl text-textPrimary">
+              <div className="p-4 bg-accentBlueLight rounded-xl text-accentBlue">
                 <Code2 size={32} strokeWidth={1.5} />
               </div>
-              <span className="text-sm font-semibold uppercase tracking-widest text-textSecondary">Software Development Services</span>
+              <span className="text-sm font-semibold uppercase tracking-widest text-accentBlue">Software Development Services</span>
             </div>
             <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-display font-extrabold leading-tight mb-8">
               From Specification<br />to Full Production
@@ -158,7 +158,7 @@ export default function DevelopmentPage() {
               { step: '04', title: 'Deployment & Growth', desc: 'Production deployment, monitoring, optimization, and ongoing support as your product scales.' }
             ].map((item, i) => (
               <div key={i} className="glass-panel p-8 text-center">
-                <span className="text-4xl font-display font-extrabold text-black/10 block mb-4">{item.step}</span>
+                <span className="text-4xl font-display font-extrabold text-accentBlue/15 block mb-4">{item.step}</span>
                 <h3 className="text-lg font-semibold mb-3">{item.title}</h3>
                 <p className="text-textSecondary text-sm leading-relaxed">{item.desc}</p>
               </div>
@@ -177,7 +177,7 @@ export default function DevelopmentPage() {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-8">
             {services.map((service, i) => (
               <div key={i} className="glass-panel p-8 flex flex-col gap-5">
-                <div className="p-4 bg-black/5 w-fit rounded-xl text-textPrimary">
+                <div className="p-4 bg-accentBlueLight w-fit rounded-xl text-accentBlue">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold">{service.title}</h3>
@@ -185,7 +185,7 @@ export default function DevelopmentPage() {
                 <ul className="flex flex-col gap-2.5 mt-auto">
                   {service.items.map((item, j) => (
                     <li key={j} className="flex items-start gap-3 text-sm text-textMuted">
-                      <Check size={15} className="text-green-600 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                      <Check size={15} className="text-accentBlue mt-0.5 flex-shrink-0" strokeWidth={2.5} />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -208,12 +208,12 @@ export default function DevelopmentPage() {
               <div key={i} className="glass-panel p-8 flex flex-col gap-5">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold">{project.title}</h3>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-textSecondary bg-black/5 px-3 py-1 rounded-full">{project.tag}</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-textSecondary bg-accentBlueLight text-accentBlue px-3 py-1 rounded-full">{project.tag}</span>
                 </div>
                 <p className="text-textSecondary leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-3 mt-auto pt-4 border-t border-border">
                   {project.highlights.map((h, j) => (
-                    <span key={j} className="text-xs text-textMuted bg-black/[0.03] px-3 py-1.5 rounded-full">
+                    <span key={j} className="text-xs text-textMuted bg-slate-100 px-3 py-1.5 rounded-full">
                       {h}
                     </span>
                   ))}
@@ -225,15 +225,15 @@ export default function DevelopmentPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border py-20 bg-bgPanel">
+      <section className="bg-[#0F172A] py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-8 text-center">
-          <h2 className="text-3xl mb-4">Ready to build something great?</h2>
-          <p className="text-textSecondary max-w-xl mx-auto leading-relaxed mb-8">
+          <h2 className="text-3xl text-white mb-4">Ready to build something great?</h2>
+          <p className="text-slate-400 max-w-xl mx-auto leading-relaxed mb-8">
             Let's discuss your project requirements and create a tailored development plan.
           </p>
           <Link
             to="/#contact"
-            className="inline-flex items-center justify-center px-8 py-3 rounded font-semibold bg-textPrimary text-white hover:-translate-y-0.5 transition-transform"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors"
           >
             Get in Touch
           </Link>
@@ -241,8 +241,8 @@ export default function DevelopmentPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 bg-bgPanel">
-        <div className="max-w-7xl mx-auto px-8 text-center text-textMuted text-sm">
+      <footer className="bg-[#020617] py-6">
+        <div className="max-w-7xl mx-auto px-8 text-center text-slate-500 text-sm">
           &copy; {new Date().getFullYear()} Shlomi Otmazgin. All rights reserved.
         </div>
       </footer>

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X } from 'react-feather';
 
 export default function ContactModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const firstInputRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      setTimeout(() => firstInputRef.current?.focus(), 100);
     } else {
       document.body.style.overflow = '';
     }
@@ -34,9 +36,12 @@ export default function ContactModal({ isOpen, onClose }) {
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Contact form"
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-[fadeIn_0.3s_ease]" />
+      <div className="absolute inset-0 bg-[#0F172A]/50 backdrop-blur-sm animate-[fadeIn_0.3s_ease]" />
 
       {/* Modal */}
       <div
@@ -46,15 +51,16 @@ export default function ContactModal({ isOpen, onClose }) {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/5 transition-colors text-textSecondary hover:text-textPrimary"
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 transition-colors text-textSecondary hover:text-textPrimary cursor-pointer"
+          aria-label="Close dialog"
         >
           <X size={20} />
         </button>
 
         {isSubmitted ? (
           <div className="text-center py-12 animate-[fadeIn_0.3s_ease]">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8 text-accentBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
@@ -70,13 +76,14 @@ export default function ContactModal({ isOpen, onClose }) {
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-textPrimary mb-1.5">Full Name</label>
                 <input
+                  ref={firstInputRef}
                   type="text"
                   id="name"
                   name="name"
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
                   placeholder="Your name"
                 />
               </div>
@@ -90,7 +97,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
                   placeholder="your@email.com"
                 />
               </div>
@@ -103,7 +110,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
                   placeholder="+972-XX-XXX-XXXX"
                 />
               </div>
@@ -117,14 +124,14 @@ export default function ContactModal({ isOpen, onClose }) {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all resize-none"
                   placeholder="Tell me about your project or question..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-lg font-semibold bg-textPrimary text-white hover:-translate-y-0.5 hover:shadow-lg transition-all mt-2"
+                className="w-full py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors mt-2 cursor-pointer"
               >
                 Send Message
               </button>
