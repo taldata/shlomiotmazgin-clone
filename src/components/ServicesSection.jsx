@@ -129,49 +129,49 @@ function ServiceModal({ service, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-[fadeIn_0.3s_ease]"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={service.title}
     >
-      <div className="absolute inset-0 bg-[#0F172A]/50 backdrop-blur-sm animate-[fadeIn_0.2s_ease]" />
+      <div className="absolute inset-0 bg-[#0F172A]/60 backdrop-blur-md" />
 
       <div
-        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] overflow-y-auto animate-[modalSlideUp_0.35s_cubic-bezier(0.16,1,0.3,1)]"
+        className="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col animate-[modalSlideUp_0.45s_cubic-bezier(0.34,1.56,0.64,1)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 bg-white border-b border-border px-6 sm:px-8 py-5 flex items-center gap-4 rounded-t-2xl">
-          <div className="p-3 bg-accentBlueLight rounded-xl text-accentBlue flex-shrink-0">
+        <div className="bg-gradient-to-r from-accentBlueLight to-accentBlueLight/50 px-6 sm:px-8 py-6 flex items-center gap-4 rounded-t-3xl border-b border-accentBlue/10">
+          <div className="p-3 bg-white rounded-xl text-accentBlue flex-shrink-0 shadow-md">
             {service.icon}
           </div>
-          <div className="min-w-0">
-            <h3 className="text-xl sm:text-2xl font-bold m-0">{service.title}</h3>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-2xl sm:text-3xl font-bold m-0 text-textPrimary">{service.title}</h3>
           </div>
           <button
             onClick={onClose}
-            className="ml-auto p-2 rounded-full hover:bg-slate-100 transition-colors text-textSecondary hover:text-textPrimary cursor-pointer flex-shrink-0"
+            className="p-2 rounded-full hover:bg-white/20 transition-all text-textPrimary hover:text-textPrimary cursor-pointer flex-shrink-0"
             aria-label="Close"
           >
-            <X size={20} />
+            <X size={24} />
           </button>
         </div>
 
-        {/* Body */}
-        <div className="px-6 sm:px-8 py-6 sm:py-8">
-          <p className="text-textSecondary leading-relaxed mb-8 text-[0.95rem]">
+        {/* Body - scrollable only if content overflows */}
+        <div className="flex-1 overflow-y-auto px-6 sm:px-8 py-6 sm:py-8">
+          <p className="text-lg text-textSecondary leading-relaxed mb-8 font-medium">
             {service.expandedSubtitle}
           </p>
 
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             {service.expandedBullets.map((bullet, i) => (
-              <div key={i} className="flex items-start gap-3.5">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accentBlueLight text-accentBlue text-xs font-bold flex items-center justify-center mt-0.5">
+              <div key={i} className="flex gap-4 group">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-accentBlue to-accentBlue/70 text-white text-xs font-bold flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform">
                   {i + 1}
                 </span>
                 <p className="text-[0.95rem] text-textSecondary leading-relaxed m-0">
-                  <strong className="text-textPrimary">{bullet.bold}</strong>{' '}
+                  <strong className="text-textPrimary text-base">{bullet.bold}:</strong>{' '}
                   {bullet.text}
                 </p>
               </div>
@@ -193,12 +193,26 @@ export default function ServicesSection() {
         ref={ref}
         className={`max-w-7xl mx-auto px-4 sm:px-8 relative z-10 section-fade ${visible ? 'visible' : ''}`}
       >
-        <div className="text-center mb-12 sm:mb-16">
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-accentBlue mb-3">What I Do</span>
-          <h2 className="text-[clamp(2rem,4vw,3rem)]">Core Services</h2>
-          <p className="text-textSecondary max-w-2xl mx-auto mt-2 leading-relaxed">
+        <div className="text-center mb-12 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accentBlueLight border border-accentBlue/20 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-accentBlue animate-pulse" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-accentBlue">What I Do</span>
+          </div>
+          <h2 className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-extrabold leading-tight mb-6">
+            Core{' '}
+            <span className="relative inline-block">
+              Services
+              <span className="absolute bottom-1 left-0 w-full h-[5px] rounded-full bg-accentBlue/30" />
+            </span>
+          </h2>
+          <p className="text-textSecondary max-w-xl mx-auto leading-relaxed text-[1.05rem]">
             Strategic technology leadership across the full spectrum — from AI adoption to M&A due diligence.
           </p>
+          <div className="flex items-center justify-center gap-3 mt-8">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-accentBlue/40" />
+            <div className="w-2 h-2 rounded-full bg-accentBlue/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-accentBlue/40" />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 sm:gap-8">
