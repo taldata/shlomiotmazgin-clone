@@ -49,20 +49,38 @@ export default function AboutSection() {
         ref={ref}
         className={`max-w-7xl mx-auto px-4 sm:px-8 section-fade ${visible ? 'visible' : ''}`}
       >
-        {/* Intro */}
-        <div className="max-w-3xl mb-14 sm:mb-20">
+        {/* Intro with Image */}
+        <div className="mb-14 sm:mb-20">
           <span className="inline-block text-xs font-semibold tracking-widest uppercase text-accentBlue mb-3">Background</span>
-          <h2 className="text-[clamp(2rem,4vw,3rem)] mb-6">
+          <h2 className="text-[clamp(2rem,4vw,3rem)] mb-8">
             What makes me <span className="text-gradient">different?</span>
           </h2>
-          <p className="text-lg text-textSecondary leading-relaxed mb-6">
-            From scaling high-growth startups to advising global enterprises, my experience spans the entire business spectrum. I specialize in guiding organizations through critical junctions, such as comprehensive Due Diligence preparation for acquisitions, while maintaining a cross-functional focus on process optimization and unlocking the full potential of engineering teams.
-          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8">
+            {/* Text */}
+            <div>
+              <p className="text-lg text-textSecondary leading-relaxed mb-6">
+                From scaling <span className="text-accentBlue font-bold">high-growth startups</span> to advising <span className="text-accentBlue font-bold">global enterprises</span>, my experience spans the entire business spectrum. I specialize in guiding organizations through <span className="text-accentBlue font-bold text-xl">critical junctions</span>, such as comprehensive <span className="text-accentBlue font-bold">Due Diligence preparation</span> for acquisitions, while maintaining a cross-functional focus on <span className="text-accentBlue font-bold text-lg">process optimization</span> and <span className="text-accentBlue font-bold">unlocking the full potential</span> of engineering teams.
+              </p>
+            </div>
+
+            {/* Image */}
+            <div className="flex items-center justify-center">
+              <div className="relative w-full max-w-sm">
+                <div className="absolute inset-0 bg-gradient-to-r from-accentBlue/20 to-accentBlue/5 rounded-3xl blur-2xl" />
+                <img
+                  src="/src/assets/shlomi-portrait.jpg"
+                  alt="Shlomi Otmazgin"
+                  className="relative w-full rounded-3xl shadow-xl object-cover aspect-[3/4]"
+                />
+              </div>
+            </div>
+          </div>
 
           <div className="glass-panel p-6 sm:p-8">
             <h3 className="text-lg sm:text-xl mb-3">AI-Driven R&D Transformation</h3>
             <p className="text-textSecondary leading-relaxed m-0">
-              My core expertise lies in spearheading the transition of traditional software departments into <strong className="text-textPrimary">AI-Native development powerhouses</strong>. I don't just implement tools; I re-engineer the entire SDLC — integrating LLMs, agentic workflows, and specialized AI toolchains like Cursor and Claude Code into the R&D DNA. By shifting teams from manual coding to high-level orchestration, I help organizations achieve radical gains in velocity, quality, and capital efficiency.
+              My core expertise lies in spearheading the transition of traditional software departments into <strong className="text-accentBlue">AI-Native development powerhouses</strong>. I don't just implement tools; I <strong className="text-accentBlue">re-engineer the entire SDLC</strong> — integrating <strong className="text-accentBlue">LLMs, agentic workflows</strong>, and specialized AI toolchains like <strong className="text-accentBlue">Cursor and Claude Code</strong> into the R&D DNA. By shifting teams from <strong className="text-accentBlue">manual coding to high-level orchestration</strong>, I help organizations achieve <strong className="text-accentBlue">radical gains in velocity, quality, and capital efficiency</strong>.
             </p>
           </div>
 

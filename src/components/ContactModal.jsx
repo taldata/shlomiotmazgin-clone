@@ -75,11 +75,11 @@ export default function ContactModal({ isOpen, onClose }) {
       aria-label="Contact form"
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-[#0F172A]/50 backdrop-blur-sm animate-[fadeIn_0.3s_ease]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A]/60 via-[#0F172A]/40 to-[#0F172A]/60 backdrop-blur-md animate-[fadeIn_0.3s_ease]" />
 
       {/* Modal */}
       <div
-        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 animate-[modalSlideUp_0.4s_cubic-bezier(0.16,1,0.3,1)]"
+        className="relative bg-gradient-to-br from-white via-slate-50 to-white rounded-3xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto animate-[modalScaleUp_0.4s_cubic-bezier(0.34,1.56,0.64,1)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
