@@ -2,6 +2,8 @@ services:
   - type: web
     name: shlomiotmazgin-clone
     env: static
+    repo: https://github.com/taldata/shlomiotmazgin-clone
+    branch: main
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     autoDeploy: true
