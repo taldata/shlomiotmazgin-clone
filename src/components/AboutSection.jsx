@@ -1,4 +1,5 @@
 import useFadeIn from '../hooks/useFadeIn';
+import shlomiPortrait from '../assets/shlomi-portrait.jpg';
 
 export default function AboutSection() {
   const [ref, visible] = useFadeIn(0.1);
@@ -69,7 +70,7 @@ export default function AboutSection() {
               <div className="relative w-full max-w-sm">
                 <div className="absolute inset-0 bg-gradient-to-r from-accentBlue/20 to-accentBlue/5 rounded-3xl blur-2xl" />
                 <img
-                  src="/src/assets/shlomi-portrait.jpg"
+                  src={shlomiPortrait}
                   alt="Shlomi Otmazgin"
                   className="relative w-full rounded-3xl shadow-xl object-cover aspect-[3/4]"
                 />
