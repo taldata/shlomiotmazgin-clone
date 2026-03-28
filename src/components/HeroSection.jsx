@@ -31,7 +31,7 @@ export default function HeroSection() {
               growth engine
             </h1>
             <p className="text-slate-300 text-sm sm:text-lg leading-relaxed mb-0 sm:mb-8 max-w-md">
-              Strategic technology leadership for CEOs who demand transparency, velocity, and measurable results from their engineering teams.
+              Bridging the Gap Between AI Potential and Engineering Reality: Leading Large-Scale Transformations to AI-Driven Development
             </p>
           </div>
 
