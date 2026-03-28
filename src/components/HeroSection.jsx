@@ -68,7 +68,7 @@ export default function HeroSection() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1B2A4A]/70 via-[#1B2A4A]/30 to-transparent flex flex-row items-center">
           <div className="max-w-[1200px] mx-auto px-8 w-full">
-            <div className="max-w-xl animate-fade-up">
+            <div className="max-w-xl">
               <span className="inline-block text-sm font-semibold tracking-widest uppercase text-blue-300 mb-6">
                 Fractional VP R&D &middot; CTO Advisory
               </span>
