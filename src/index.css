@@ -38,6 +38,13 @@
     opacity: 1;
     transform: translateY(0);
   }
+  @media (max-width: 639px) {
+    .section-fade {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 }
 
 @keyframes fadeIn {

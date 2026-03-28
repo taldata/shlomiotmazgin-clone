@@ -18,7 +18,7 @@ export default function HeroSection() {
         {/* Gradient only at bottom quarter */}
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 to-transparent" />
         {/* Text pinned just above metrics bar */}
-        <div className="absolute left-0 right-0 px-5 animate-fade-up" style={{ bottom: '110px' }}>
+        <div className="absolute left-0 right-0 px-5" style={{ bottom: '110px' }}>
           <h1 className="text-[clamp(1.4rem,5.5vw,1.85rem)] text-white leading-[1.2] mb-3">
             Transform your R&D into an <span className="text-blue-400">AI-driven</span> growth engine
           </h1>
