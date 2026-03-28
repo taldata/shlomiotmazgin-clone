@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X } from 'react-feather';
 
 // ← Replace with your Web3Forms access key (get one at https://web3forms.com)
-const WEB3FORMS_KEY = '2ebfde27-eeb9-47e9-8d92-16aa53671557';
+const WEB3FORMS_KEY = '358ed785-0ccc-4750-b47e-5d5a5c6bea48';
 
 export default function ContactModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
