@@ -48,7 +48,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/shlomiot/"
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn profile"
@@ -84,7 +84,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/shlomiot/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn profile"

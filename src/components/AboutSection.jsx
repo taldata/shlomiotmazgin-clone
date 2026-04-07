@@ -59,7 +59,7 @@ export default function AboutSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
             {/* Text */}
-            <div className="flex flex-col gap-7">
+            <div className="flex flex-col gap-7 fade-up-child" style={{ '--anim-delay': '100ms' }}>
               <p className="text-lg text-textSecondary leading-relaxed">
                 With over 20 years leading R&D organizations — from early-stage startups to global enterprises — I've operated at every level of the engineering stack. I specialize in <strong className="text-textPrimary font-semibold">guiding organizations through critical junctions</strong>: scaling teams, preparing for acquisitions, and unlocking the full potential of engineering departments.
               </p>
@@ -82,7 +82,7 @@ export default function AboutSection() {
             </div>
 
             {/* Image */}
-            <div className="relative w-full max-w-sm mx-auto md:mx-0">
+            <div className="relative w-full max-w-sm mx-auto md:mx-0 fade-up-child" style={{ '--anim-delay': '220ms' }}>
               <div className="absolute inset-0 bg-gradient-to-r from-accentBlue/20 to-accentBlue/5 rounded-3xl blur-2xl" />
               <img
                 src={shlomiPortrait}
@@ -98,7 +98,11 @@ export default function AboutSection() {
           <span className="inline-block text-xs font-semibold tracking-widest uppercase text-accentBlue mb-6">Professional Experience</span>
           <div className="flex flex-col gap-8">
             {experiences.map((exp, index) => (
-              <div key={index} className="border-l-2 border-accentBlue/20 pl-6 sm:pl-8 relative">
+              <div
+                key={index}
+                className="border-l-2 border-accentBlue/20 pl-6 sm:pl-8 relative fade-up-child"
+                style={{ '--anim-delay': `${index * 100}ms` }}
+              >
                 <div
                   className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-accentBlue"
                   style={{ boxShadow: '0 0 0 4px rgba(37, 99, 235, 0.15)' }}

@@ -28,7 +28,7 @@ export default function Footer() {
               <ArrowRight size={16} />
             </button>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/shlomiot/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn profile"

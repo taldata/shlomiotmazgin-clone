@@ -29,10 +29,40 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  /* Scroll-triggered section fade */
   .section-fade {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .section-fade.visible {
     opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(0);
+  }
+
+  /* Staggered children — parent must have .visible class */
+  .fade-up-child {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  .visible .fade-up-child {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1) var(--anim-delay, 0ms),
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) var(--anim-delay, 0ms);
+  }
+
+  /* Hero entrance — fires on mount via CSS animation */
+  .hero-reveal {
+    animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--anim-delay, 0ms);
+  }
+
+  /* Scroll-down bounce indicator */
+  .scroll-bounce {
+    animation: scrollBounce 1.8s ease-in-out infinite;
   }
 }
 
@@ -60,5 +90,39 @@
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .section-fade,
+  .fade-up-child,
+  .hero-reveal,
+  .scroll-bounce {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

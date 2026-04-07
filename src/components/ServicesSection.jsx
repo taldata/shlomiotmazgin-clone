@@ -219,7 +219,8 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="glass-panel p-6 sm:p-8 flex flex-col group"
+              className="glass-panel p-6 sm:p-8 flex flex-col group fade-up-child"
+              style={{ '--anim-delay': `${index * 80}ms` }}
             >
               <div className="p-3.5 bg-accentBlueLight w-fit rounded-xl text-accentBlue group-hover:bg-accentBlue group-hover:text-white transition-colors duration-300 mb-5">
                 {service.icon}
