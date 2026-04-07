@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Code2, Layers, Rocket, Settings, Monitor, Smartphone, Database, Cloud, Check } from 'lucide-react';
+import useFadeIn from '../hooks/useFadeIn';
 
 export default function DevelopmentPage() {
+  const [processRef, processVisible] = useFadeIn(0.1);
+  const [servicesRef, servicesVisible] = useFadeIn(0.1);
+  const [projectsRef, projectsVisible] = useFadeIn(0.1);
+  const [ctaRef, ctaVisible] = useFadeIn(0.1);
+
   const services = [
     {
       icon: <Layers size={28} strokeWidth={1.5} />,
@@ -145,9 +151,9 @@ export default function DevelopmentPage() {
 
       {/* Process Steps */}
       <section className="border-t border-border py-20">
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4">Our Process</h2>
-          <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto">
+        <div ref={processRef} className={`max-w-7xl mx-auto px-8 section-fade ${processVisible ? 'visible' : ''}`}>
+          <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4 fade-up-child" style={{ '--anim-delay': '0ms' }}>Our Process</h2>
+          <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto fade-up-child" style={{ '--anim-delay': '80ms' }}>
             A proven methodology that ensures quality, transparency, and alignment at every stage.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -157,7 +163,7 @@ export default function DevelopmentPage() {
               { step: '03', title: 'Development & Testing', desc: 'Agile sprints with continuous integration, automated testing, and regular demos for feedback.' },
               { step: '04', title: 'Deployment & Growth', desc: 'Production deployment, monitoring, optimization, and ongoing support as your product scales.' }
             ].map((item, i) => (
-              <div key={i} className="glass-panel p-8 text-center">
+              <div key={i} className="glass-panel p-8 text-center fade-up-child" style={{ '--anim-delay': `${160 + i * 100}ms` }}>
                 <span className="text-4xl font-display font-extrabold text-accentBlue/15 block mb-4">{item.step}</span>
                 <h3 className="text-lg font-semibold mb-3">{item.title}</h3>
                 <p className="text-textSecondary text-sm leading-relaxed">{item.desc}</p>
@@ -169,14 +175,14 @@ export default function DevelopmentPage() {
 
       {/* Services Detail */}
       <section className="border-t border-border py-20 bg-bgPanel">
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4">What We Deliver</h2>
-          <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto">
+        <div ref={servicesRef} className={`max-w-7xl mx-auto px-8 section-fade ${servicesVisible ? 'visible' : ''}`}>
+          <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4 fade-up-child" style={{ '--anim-delay': '0ms' }}>What We Deliver</h2>
+          <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto fade-up-child" style={{ '--anim-delay': '80ms' }}>
             Full-spectrum development capabilities to build, deploy, and scale your product.
           </p>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-8">
             {services.map((service, i) => (
-              <div key={i} className="glass-panel p-8 flex flex-col gap-5">
+              <div key={i} className="glass-panel p-8 flex flex-col gap-5 fade-up-child" style={{ '--anim-delay': `${160 + i * 80}ms` }}>
                 <div className="p-4 bg-accentBlueLight w-fit rounded-xl text-accentBlue">
                   {service.icon}
                 </div>
@@ -198,14 +204,14 @@ export default function DevelopmentPage() {
 
       {/* Project Examples */}
       <section className="border-t border-border py-20">
-        <div className="max-w-7xl mx-auto px-8">
-          <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4">Project Examples</h2>
-          <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto">
+        <div ref={projectsRef} className={`max-w-7xl mx-auto px-8 section-fade ${projectsVisible ? 'visible' : ''}`}>
+          <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4 fade-up-child" style={{ '--anim-delay': '0ms' }}>Project Examples</h2>
+          <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto fade-up-child" style={{ '--anim-delay': '80ms' }}>
             A selection of projects showcasing our expertise across different domains and technologies.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, i) => (
-              <div key={i} className="glass-panel p-8 flex flex-col gap-5">
+              <div key={i} className="glass-panel p-8 flex flex-col gap-5 fade-up-child" style={{ '--anim-delay': `${160 + i * 100}ms` }}>
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold">{project.title}</h3>
                   <span className="text-xs font-semibold uppercase tracking-wider text-textSecondary bg-accentBlueLight text-accentBlue px-3 py-1 rounded-full">{project.tag}</span>
@@ -226,14 +232,15 @@ export default function DevelopmentPage() {
 
       {/* CTA */}
       <section className="bg-[#0F172A] py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-8 text-center">
-          <h2 className="text-3xl text-white mb-4">Ready to build something great?</h2>
-          <p className="text-slate-400 max-w-xl mx-auto leading-relaxed mb-8">
+        <div ref={ctaRef} className={`max-w-7xl mx-auto px-8 text-center section-fade ${ctaVisible ? 'visible' : ''}`}>
+          <h2 className="text-3xl text-white mb-4 fade-up-child" style={{ '--anim-delay': '0ms' }}>Ready to build something great?</h2>
+          <p className="text-slate-400 max-w-xl mx-auto leading-relaxed mb-8 fade-up-child" style={{ '--anim-delay': '80ms' }}>
             Let's discuss your project requirements and create a tailored development plan.
           </p>
           <Link
             to="/#contact"
-            className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors fade-up-child"
+            style={{ '--anim-delay': '160ms' }}
           >
             Get in Touch
           </Link>

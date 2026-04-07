@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import ContactModal from './ContactModal';
 import useCountUp from '../hooks/useCountUp';
+import useParallax from '../hooks/useParallax';
 
 const stats = [
   { numeric: 20, prefix: '', suffix: '+', label: 'Years Experience' },
@@ -37,6 +38,7 @@ function StatCounterMobile({ numeric, prefix, suffix, label, isActive, delay = 0
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [countersActive, setCountersActive] = useState(false);
+  const parallaxRef = useParallax(0.08);
 
   // Fire counters after hero entrance animations settle
   useEffect(() => {
@@ -102,10 +104,11 @@ export default function HeroSection() {
       {/* ── DESKTOP layout ── */}
       <div className="hidden sm:block relative">
         <img
+          ref={parallaxRef}
           src="/hero-image-new.png"
           alt=""
           aria-hidden="true"
-          className="w-full block h-auto object-cover object-center"
+          className="w-full block h-auto object-cover object-center scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1B2A4A]/70 via-[#1B2A4A]/30 to-transparent flex flex-row items-center">
           <div className="max-w-[1200px] mx-auto px-8 w-full">
