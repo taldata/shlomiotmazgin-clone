@@ -1,8 +1,10 @@
 import useFadeIn from '../hooks/useFadeIn';
+import useParallax from '../hooks/useParallax';
 import shlomiPortrait from '../assets/shlomi-portrait.jpg';
 
 export default function AboutSection() {
   const [ref, visible] = useFadeIn(0.1);
+  const parallaxRef = useParallax(0.12);
 
   const experiences = [
     {
@@ -82,12 +84,13 @@ export default function AboutSection() {
             </div>
 
             {/* Image */}
-            <div className="relative w-full max-w-sm mx-auto md:mx-0 fade-up-child" style={{ '--anim-delay': '220ms' }}>
-              <div className="absolute inset-0 bg-gradient-to-r from-accentBlue/20 to-accentBlue/5 rounded-3xl blur-2xl" />
+            <div className="relative w-full max-w-sm mx-auto md:mx-0 overflow-hidden rounded-3xl fade-up-child" style={{ '--anim-delay': '220ms' }}>
+              <div className="absolute inset-0 bg-gradient-to-r from-accentBlue/20 to-accentBlue/5 blur-2xl" />
               <img
+                ref={parallaxRef}
                 src={shlomiPortrait}
                 alt="Shlomi Otmazgin"
-                className="relative w-full rounded-3xl shadow-xl object-cover aspect-[3/4]"
+                className="relative w-full shadow-xl object-cover aspect-[3/4] scale-105"
               />
             </div>
           </div>
