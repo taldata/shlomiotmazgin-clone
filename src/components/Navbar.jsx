@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Linkedin, Menu, X } from 'react-feather';
+import { Menu, X } from 'lucide-react';
+
+function LinkedinIcon({ size = 24 }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -23,8 +33,8 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_3px_rgba(0,0,0,0.06)] border-b border-border'
-          : 'bg-white border-b border-border'
+          ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_3px_rgba(0,0,0,0.06)] border-b border-borderLine'
+          : 'bg-white border-b border-borderLine'
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8 h-[5.5rem] flex justify-between items-center">
@@ -54,7 +64,7 @@ export default function Navbar() {
             aria-label="LinkedIn profile"
             className="text-textSecondary hover:text-accentBlue transition-colors"
           >
-            <Linkedin size={20} />
+            <LinkedinIcon size={20} />
           </a>
         </div>
 
@@ -71,7 +81,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-border animate-[fadeIn_0.2s_ease]">
+        <div className="md:hidden bg-white border-t border-borderLine animate-[fadeIn_0.2s_ease]">
           <div className="flex flex-col px-6 py-4 gap-4">
             {links.map(link => (
               <a
@@ -90,7 +100,7 @@ export default function Navbar() {
               aria-label="LinkedIn profile"
               className="text-textSecondary py-2 hover:text-accentBlue transition-colors"
             >
-              <Linkedin size={20} />
+              <LinkedinIcon size={20} />
             </a>
           </div>
         </div>

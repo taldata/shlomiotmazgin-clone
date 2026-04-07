@@ -1,9 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ── Theme (replaces tailwind.config.js) ── */
+@theme {
+  --color-bgMain: #F8FAFC;
+  --color-bgPanel: #ffffff;
+  --color-borderLine: #E2E8F0;
+  --color-textPrimary: #0F172A;
+  --color-textSecondary: #475569;
+  --color-textMuted: #94A3B8;
+  --color-accent: #0F172A;
+  --color-accentHover: #1E293B;
+  --color-accentBlue: #2563EB;
+  --color-accentBlueDark: #1D4ED8;
+  --color-accentBlueLight: #DBEAFE;
 
+  --font-sans: 'Montserrat', sans-serif;
+  --font-display: 'Outfit', 'Montserrat', sans-serif;
+
+  --animate-fade-up: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fadeIn 0.5s ease forwards;
+  --animate-counter: counter 2s ease-out forwards;
+
+  --keyframes-fadeUp: {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  };
+  --keyframes-fadeIn: {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  };
+  --keyframes-counter: {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  };
+}
+
+/* ── Base layer ── */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -16,92 +49,70 @@
   }
 }
 
-@layer utilities {
-  .glass-panel {
-    @apply bg-white shadow-[0_1px_3px_0_rgba(0,0,0,0.04),0_1px_2px_-1px_rgba(0,0,0,0.03)] border border-border rounded-2xl transition-all duration-300;
-  }
-  .glass-panel:hover {
-    @apply -translate-y-1 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.08),0_8px_10px_-6px_rgba(0,0,0,0.04)] border-slate-200;
-  }
-  .text-gradient {
-    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Scroll-triggered section fade */
-  .section-fade {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .section-fade.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Staggered children — parent must have .visible class */
-  .fade-up-child {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-  .visible .fade-up-child {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1) var(--anim-delay, 0ms),
-                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) var(--anim-delay, 0ms);
-  }
-
-  /* Hero entrance — fires on mount via CSS animation */
-  .hero-reveal {
-    animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: var(--anim-delay, 0ms);
-  }
-
-  /* Scroll-down bounce indicator */
-  .scroll-bounce {
-    animation: scrollBounce 1.8s ease-in-out infinite;
-  }
+/* ── Custom utilities ── */
+@utility glass-panel {
+  @apply bg-white shadow-[0_1px_3px_0_rgba(0,0,0,0.04),0_1px_2px_-1px_rgba(0,0,0,0.03)] border border-borderLine rounded-2xl transition-all duration-300;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@utility text-gradient {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
+@utility section-fade {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Compound selectors — cannot use @utility */
+.glass-panel:hover {
+  @apply -translate-y-1 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.08),0_8px_10px_-6px_rgba(0,0,0,0.04)] border-slate-200;
+}
+
+.section-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-up-child {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.visible .fade-up-child {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1) var(--anim-delay, 0ms),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) var(--anim-delay, 0ms);
+}
+
+.hero-reveal {
+  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--anim-delay, 0ms);
+}
+
+.scroll-bounce {
+  animation: scrollBounce 1.8s ease-in-out infinite;
+}
+
+/* ── Keyframes ── */
 @keyframes modalSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes modalScaleUp {
-  from {
-    opacity: 0;
-    transform: scale(0.85) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scrollBounce {

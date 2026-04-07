@@ -120,7 +120,7 @@ export default function DevelopmentPage() {
   return (
     <div className="min-h-screen bg-bgMain">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-border">
+      <nav className="fixed top-0 w-full z-50 bg-white border-b border-borderLine">
         <div className="max-w-7xl mx-auto px-8 h-[5.5rem] flex items-center">
           <Link to="/" className="inline-flex items-center gap-3 text-textSecondary hover:text-textPrimary transition-colors font-medium">
             <ArrowLeft size={20} />
@@ -150,7 +150,7 @@ export default function DevelopmentPage() {
       </section>
 
       {/* Process Steps */}
-      <section className="border-t border-border py-20">
+      <section className="border-t border-borderLine py-20">
         <div ref={processRef} className={`max-w-7xl mx-auto px-8 section-fade ${processVisible ? 'visible' : ''}`}>
           <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4 fade-up-child" style={{ '--anim-delay': '0ms' }}>Our Process</h2>
           <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto fade-up-child" style={{ '--anim-delay': '80ms' }}>
@@ -174,7 +174,7 @@ export default function DevelopmentPage() {
       </section>
 
       {/* Services Detail */}
-      <section className="border-t border-border py-20 bg-bgPanel">
+      <section className="border-t border-borderLine py-20 bg-bgPanel">
         <div ref={servicesRef} className={`max-w-7xl mx-auto px-8 section-fade ${servicesVisible ? 'visible' : ''}`}>
           <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4 fade-up-child" style={{ '--anim-delay': '0ms' }}>What We Deliver</h2>
           <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto fade-up-child" style={{ '--anim-delay': '80ms' }}>
@@ -203,7 +203,7 @@ export default function DevelopmentPage() {
       </section>
 
       {/* Project Examples */}
-      <section className="border-t border-border py-20">
+      <section className="border-t border-borderLine py-20">
         <div ref={projectsRef} className={`max-w-7xl mx-auto px-8 section-fade ${projectsVisible ? 'visible' : ''}`}>
           <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] text-center mb-4 fade-up-child" style={{ '--anim-delay': '0ms' }}>Project Examples</h2>
           <p className="text-center text-textSecondary mb-16 max-w-2xl mx-auto fade-up-child" style={{ '--anim-delay': '80ms' }}>
@@ -217,7 +217,7 @@ export default function DevelopmentPage() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-textSecondary bg-accentBlueLight text-accentBlue px-3 py-1 rounded-full">{project.tag}</span>
                 </div>
                 <p className="text-textSecondary leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-3 mt-auto pt-4 border-t border-border">
+                <div className="flex flex-wrap gap-3 mt-auto pt-4 border-t border-borderLine">
                   {project.highlights.map((h, j) => (
                     <span key={j} className="text-xs text-textMuted bg-slate-100 px-3 py-1.5 rounded-full">
                       {h}
