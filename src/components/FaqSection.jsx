@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'react-feather';
+import { ChevronDown } from 'lucide-react';
 import useFadeIn from '../hooks/useFadeIn';
 
 export default function FaqSection() {
@@ -59,7 +59,7 @@ export default function FaqSection() {
               <div
                 key={index}
                 className={`bg-white rounded-xl border transition-all duration-200 overflow-hidden ${
-                  isOpen ? 'border-accentBlue/20 shadow-[0_2px_8px_rgba(37,99,235,0.06)]' : 'border-border hover:border-slate-200'
+                  isOpen ? 'border-accentBlue/20 shadow-[0_2px_8px_rgba(37,99,235,0.06)]' : 'border-borderLine hover:border-slate-200'
                 }`}
               >
                 <button

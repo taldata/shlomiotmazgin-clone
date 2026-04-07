@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X } from 'react-feather';
+import { X } from 'lucide-react';
 
 // ← Replace with your Web3Forms access key (get one at https://web3forms.com)
 const WEB3FORMS_KEY = '358ed785-0ccc-4750-b47e-5d5a5c6bea48';
@@ -126,7 +126,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
+                  className="w-full px-4 py-3 rounded-lg border border-borderLine bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
                   placeholder="Your name"
                 />
               </div>
@@ -140,7 +140,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
+                  className="w-full px-4 py-3 rounded-lg border border-borderLine bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
                   placeholder="your@email.com"
                 />
               </div>
@@ -153,7 +153,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
+                  className="w-full px-4 py-3 rounded-lg border border-borderLine bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all"
                   placeholder="+972-XX-XXX-XXXX"
                 />
               </div>
@@ -167,7 +167,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-borderLine bg-white text-textPrimary placeholder-textMuted focus:outline-none focus:ring-2 focus:ring-accentBlue/20 focus:border-accentBlue transition-all resize-none"
                   placeholder="Tell me about your project or question..."
                 />
               </div>

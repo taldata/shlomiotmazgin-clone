@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X } from 'react-feather';
+import { X } from 'lucide-react';
 import {
   BrainCircuit, UserCog, BarChart3,
   Scale, GraduationCap, Code2,
