@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ContactModal from './ContactModal';
 import useCountUp from '../hooks/useCountUp';
 import useParallax from '../hooks/useParallax';
@@ -14,24 +15,33 @@ const stats = [
 function StatCounter({ numeric, prefix, suffix, label, isActive, delay = 0 }) {
   const count = useCountUp(numeric, 1600, isActive);
   return (
-    <div className="hero-reveal" style={{ '--anim-delay': `${delay}ms` }}>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.8, delay: delay / 1000, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="text-2xl font-bold text-white tabular-nums">
         {prefix}{isActive ? count : 0}{suffix}
       </div>
       <div className="text-sm text-slate-400">{label}</div>
-    </div>
+    </motion.div>
   );
 }
 
 function StatCounterMobile({ numeric, prefix, suffix, label, isActive, delay = 0 }) {
   const count = useCountUp(numeric, 1600, isActive);
   return (
-    <div className="text-center hero-reveal" style={{ '--anim-delay': `${delay}ms` }}>
+    <motion.div 
+      initial={{ opacity: 0, y: 15 }}
+      animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+      transition={{ duration: 0.6, delay: delay / 1000, ease: [0.16, 1, 0.3, 1] }}
+      className="text-center"
+    >
       <div className="text-base font-bold text-white tabular-nums">
         {prefix}{isActive ? count : 0}{suffix}
       </div>
       <div className="text-[0.65rem] text-slate-400">{label}</div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -59,15 +69,19 @@ export default function HeroSection() {
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 to-transparent" />
 
         <div className="absolute left-0 right-0 px-5" style={{ bottom: '110px' }}>
-          <h1
-            className="text-[clamp(1.4rem,5.5vw,1.85rem)] text-white leading-[1.2] mb-3 hero-reveal"
-            style={{ '--anim-delay': '100ms' }}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[clamp(1.4rem,5.5vw,1.85rem)] text-white leading-[1.2] mb-3"
           >
             Transform your R&D into an <span className="text-blue-400">AI-driven</span> growth engine
-          </h1>
-          <div
-            className="flex flex-row gap-2 hero-reveal"
-            style={{ '--anim-delay': '250ms' }}
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-row gap-2"
           >
             <button
               onClick={() => setIsModalOpen(true)}
@@ -82,7 +96,7 @@ export default function HeroSection() {
             >
               View Services
             </a>
-          </div>
+          </motion.div>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 bg-[#0F172A]/90 backdrop-blur-sm border-t border-white/10">
@@ -113,64 +127,81 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1B2A4A]/70 via-[#1B2A4A]/30 to-transparent flex flex-row items-center">
           <div className="max-w-[1200px] mx-auto px-8 w-full">
             <div className="max-w-xl">
-              <span
-                className="inline-block text-sm font-semibold tracking-widest uppercase text-blue-300 mb-6 hero-reveal"
-                style={{ '--anim-delay': '0ms' }}
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="inline-block text-sm font-semibold tracking-widest uppercase text-blue-300 mb-6"
               >
                 Fractional VP R&D &middot; CTO Advisory
-              </span>
-              <h1
-                className="text-[clamp(2rem,6vw,3.25rem)] text-white leading-[1.15] mb-6 hero-reveal"
-                style={{ '--anim-delay': '150ms' }}
+              </motion.span>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[clamp(2rem,6vw,3.25rem)] text-white leading-[1.15] mb-6"
               >
                 Transform your R&D{' '}<br />
                 into an <span className="text-blue-400">AI-driven</span>{' '}<br />
                 growth engine
-              </h1>
-              <p
-                className="text-slate-300 text-lg leading-relaxed mb-8 max-w-md hero-reveal"
-                style={{ '--anim-delay': '280ms' }}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                className="text-slate-300 text-lg leading-relaxed mb-8 max-w-md"
               >
                 Bridging the Gap Between AI Potential and Engineering Reality: Leading Large-Scale Transformations to AI-Driven Development
-              </p>
-              <div
-                className="flex flex-row gap-4 hero-reveal"
-                style={{ '--anim-delay': '400ms' }}
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-row gap-4"
               >
-                <button
+                <motion.button
+                  whileHover={{ y: -2, boxShadow: "0px 10px 20px rgba(37, 99, 235, 0.25)" }}
+                  whileTap={{ y: 0, scale: 0.98 }}
                   onClick={() => setIsModalOpen(true)}
-                  className="relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors cursor-pointer text-base overflow-hidden group"
+                  className="relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg font-semibold bg-accentBlue text-white hover:bg-accentBlueDark transition-colors cursor-pointer text-base overflow-hidden group border border-transparent"
                 >
                   {/* Shimmer on hover */}
                   <span className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-20deg]" />
                   Book a Consultation
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
-                </button>
-                <a
+                </motion.button>
+                
+                <motion.a
+                  whileHover={{ y: -2, backgroundColor: "rgba(255, 255, 255, 0.12)", borderColor: "rgba(255, 255, 255, 0.4)" }}
+                  whileTap={{ y: 0, scale: 0.98 }}
                   href="#services"
-                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-lg font-semibold text-white border border-white/25 hover:bg-white/10 transition-colors text-base"
+                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-lg font-semibold text-white border border-white/25 transition-colors text-base"
                 >
                   View Services
-                </a>
-              </div>
+                </motion.a>
+              </motion.div>
 
               {/* Scroll indicator */}
-              <a
+              <motion.a
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 href="#services"
                 aria-label="Scroll to services"
-                className="mt-10 inline-flex flex-col items-center gap-1.5 text-white/40 hover:text-white/70 transition-colors hero-reveal"
-                style={{ '--anim-delay': '600ms' }}
+                className="mt-10 inline-flex flex-col items-center gap-1.5 text-white/40 hover:text-white/70 transition-colors"
               >
                 <span className="text-[0.65rem] tracking-widest uppercase">Scroll</span>
                 <ChevronDown size={16} className="scroll-bounce" />
-              </a>
+              </motion.a>
             </div>
           </div>
         </div>
 
-        <div
-          className="absolute bottom-0 left-0 right-0 bg-[#0F172A]/90 backdrop-blur-sm border-t border-white/10 hero-reveal"
-          style={{ '--anim-delay': '550ms' }}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute bottom-0 left-0 right-0 bg-[#0F172A]/90 backdrop-blur-sm border-t border-white/10"
         >
           <div className="max-w-[1200px] mx-auto px-8 py-5">
             <div className="grid grid-cols-4 gap-8">
@@ -184,7 +215,7 @@ export default function HeroSection() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

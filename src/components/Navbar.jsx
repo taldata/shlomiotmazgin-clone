@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function LinkedinIcon({ size = 24 }) {
   return (
@@ -30,10 +31,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_3px_rgba(0,0,0,0.06)] border-b border-borderLine'
+          ? 'bg-white/80 backdrop-blur-xl shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] border-b border-borderLine/50'
           : 'bg-white border-b border-borderLine'
       }`}
     >
@@ -41,7 +45,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3 sm:gap-4">
           <img src="/logo.avif" alt="Shlomi Otmazgin" className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover" />
-          <a href="/" className="text-base sm:text-xl font-extrabold text-textPrimary tracking-[3px] sm:tracking-[4px] leading-tight">
+          <a href="/" className="text-base sm:text-lg font-extrabold text-textPrimary tracking-[0.15em] sm:tracking-[0.2em] leading-tight transition-colors hover:text-accentBlue">
             SHLOMI<br/>OTMAZGIN
           </a>
         </div>
@@ -52,7 +56,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-textSecondary font-medium text-[0.9rem] hover:text-accentBlue transition-colors"
+              className="text-textSecondary font-medium text-[0.95rem] hover:text-accentBlue transition-colors"
             >
               {link.label}
             </a>
@@ -62,7 +66,7 @@ export default function Navbar() {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn profile"
-            className="text-textSecondary hover:text-accentBlue transition-colors"
+            className="text-textSecondary hover:text-accentBlue transition-colors p-2 rounded-full hover:bg-slate-50"
           >
             <LinkedinIcon size={20} />
           </a>
@@ -70,7 +74,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 text-textPrimary cursor-pointer"
+          className="md:hidden p-2 text-textPrimary cursor-pointer hover:bg-slate-50 rounded-full transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
@@ -80,31 +84,39 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-borderLine animate-[fadeIn_0.2s_ease]">
-          <div className="flex flex-col px-6 py-4 gap-4">
-            {links.map(link => (
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-white/95 backdrop-blur-xl border-t border-borderLine overflow-hidden"
+          >
+            <div className="flex flex-col px-6 py-4 gap-4">
+              {links.map(link => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-textSecondary font-medium text-base py-2 hover:text-accentBlue transition-colors"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.label}
-                href={link.href}
-                className="text-textSecondary font-medium text-base py-2 hover:text-accentBlue transition-colors"
-                onClick={() => setMobileOpen(false)}
+                href="https://www.linkedin.com/in/shlomiot/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn profile"
+                className="text-textSecondary py-2 hover:text-accentBlue transition-colors"
               >
-                {link.label}
+                <LinkedinIcon size={20} />
               </a>
-            ))}
-            <a
-              href="https://www.linkedin.com/in/shlomiot/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn profile"
-              className="text-textSecondary py-2 hover:text-accentBlue transition-colors"
-            >
-              <LinkedinIcon size={20} />
-            </a>
-          </div>
-        </div>
-      )}
-    </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
-import {
-  BrainCircuit, UserCog, BarChart3,
-  Scale, GraduationCap, Code2,
-  ArrowRight
-} from 'lucide-react';
-import useFadeIn from '../hooks/useFadeIn';
+import { X, BrainCircuit, UserCog, BarChart3, Scale, GraduationCap, Code2, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const services = [
   {
@@ -124,76 +119,103 @@ const services = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
+
 function ServiceModal({ service, onClose }) {
   if (!service) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-[fadeIn_0.3s_ease]"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label={service.title}
-    >
-      <div className="absolute inset-0 bg-[#0F172A]/60 backdrop-blur-md" />
-
-      <div
-        className="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col animate-[modalSlideUp_0.45s_cubic-bezier(0.34,1.56,0.64,1)]"
-        onClick={(e) => e.stopPropagation()}
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+        onClick={onClose}
+        role="dialog"
+        aria-modal="true"
+        aria-label={service.title}
       >
-        {/* Header */}
-        <div className="bg-gradient-to-r from-accentBlueLight to-accentBlueLight/50 px-6 sm:px-8 py-6 flex items-center gap-4 rounded-t-3xl border-b border-accentBlue/10">
-          <div className="p-3 bg-white rounded-xl text-accentBlue flex-shrink-0 shadow-md">
-            {service.icon}
-          </div>
-          <div className="min-w-0 flex-1">
-            <h3 className="text-2xl sm:text-3xl font-bold m-0 text-textPrimary">{service.title}</h3>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-white/20 transition-all text-textPrimary hover:text-textPrimary cursor-pointer flex-shrink-0"
-            aria-label="Close"
-          >
-            <X size={24} />
-          </button>
-        </div>
+        <div className="absolute inset-0 bg-[#0F172A]/60 backdrop-blur-md" />
 
-        {/* Body - scrollable only if content overflows */}
-        <div className="flex-1 overflow-y-auto px-6 sm:px-8 py-6 sm:py-8">
-          <p className="text-lg text-textSecondary leading-relaxed mb-8 font-medium">
-            {service.expandedSubtitle}
-          </p>
-
-          <div className="flex flex-col gap-6">
-            {service.expandedBullets.map((bullet, i) => (
-              <div key={i} className="flex gap-4 group">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-accentBlue to-accentBlue/70 text-white text-xs font-bold flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform">
-                  {i + 1}
-                </span>
-                <p className="text-[0.95rem] text-textSecondary leading-relaxed m-0">
-                  <strong className="text-textPrimary text-base">{bullet.bold}:</strong>{' '}
-                  {bullet.text}
-                </p>
-              </div>
-            ))}
+        <motion.div
+          initial={{ y: 50, opacity: 0, scale: 0.95 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          exit={{ y: 20, opacity: 0, scale: 0.95 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="bg-gradient-to-r from-accentBlueLight to-accentBlueLight/50 px-6 sm:px-8 py-6 flex items-center gap-4 rounded-t-3xl border-b border-accentBlue/10">
+            <div className="p-3 bg-white rounded-xl text-accentBlue flex-shrink-0 shadow-md">
+              {service.icon}
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-2xl sm:text-3xl font-bold m-0 text-textPrimary">{service.title}</h3>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full hover:bg-white/50 transition-all text-textPrimary cursor-pointer flex-shrink-0"
+              aria-label="Close"
+            >
+              <X size={24} />
+            </button>
           </div>
-        </div>
-      </div>
-    </div>
+
+          {/* Body */}
+          <div className="flex-1 overflow-y-auto px-6 sm:px-8 py-6 sm:py-8">
+            <p className="text-lg text-textSecondary leading-relaxed mb-8 font-medium">
+              {service.expandedSubtitle}
+            </p>
+
+            <div className="flex flex-col gap-6">
+              {service.expandedBullets.map((bullet, i) => (
+                <div key={i} className="flex gap-4 group">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-accentBlue to-accentBlue/70 text-white text-xs font-bold flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform">
+                    {i + 1}
+                  </span>
+                  <p className="text-[0.95rem] text-textSecondary leading-relaxed m-0">
+                    <strong className="text-textPrimary text-base">{bullet.bold}:</strong>{' '}
+                    {bullet.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
 export default function ServicesSection() {
-  const [ref, visible] = useFadeIn(0.1);
   const [expandedService, setExpandedService] = useState(null);
 
   return (
     <section id="services" className="py-16 sm:py-28 relative bg-bgPanel">
-      <div
-        ref={ref}
-        className={`max-w-7xl mx-auto px-4 sm:px-8 relative z-10 section-fade ${visible ? 'visible' : ''}`}
-      >
-        <div className="text-center mb-12 sm:mb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 sm:mb-20"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accentBlueLight border border-accentBlue/20 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-accentBlue animate-pulse" />
             <span className="text-xs font-semibold tracking-widest uppercase text-accentBlue">What I Do</span>
@@ -213,14 +235,20 @@ export default function ServicesSection() {
             <div className="w-2 h-2 rounded-full bg-accentBlue/50" />
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-accentBlue/40" />
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 sm:gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 sm:gap-8"
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
+              variants={itemVariants}
               key={index}
-              className="glass-panel p-6 sm:p-8 flex flex-col group fade-up-child"
-              style={{ '--anim-delay': `${index * 80}ms` }}
+              className="glass-panel p-6 sm:p-8 flex flex-col group"
             >
               <div className="p-3.5 bg-accentBlueLight w-fit rounded-xl text-accentBlue group-hover:bg-accentBlue group-hover:text-white transition-colors duration-300 mb-5">
                 {service.icon}
@@ -247,9 +275,9 @@ export default function ServicesSection() {
                 Learn more
                 <ArrowRight size={16} />
               </button>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <ServiceModal
